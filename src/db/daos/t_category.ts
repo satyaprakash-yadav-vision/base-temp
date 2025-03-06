@@ -2,23 +2,23 @@ import { BaseDAO } from './Base';
 import { MODELS } from '../../constants';
 import { Op } from 'sequelize';
 
-export class ForgetPasswordDao extends BaseDAO {
+export class CategoryDao extends BaseDAO {
   constructor() {
-    super(MODELS.t_forget_password);
+    super(MODELS.t_category);
   }
 
-  public createForgetPassword(params) {
+  public createCategory(params) {
     return this.create(params);
   }
-  public createBulkForgetPassword(params) {
+  public createBulkCategory(params) {
     return this.bulkCreate(params);
   }
 
-  public updateForgetPassword(params, where) {
+  public updateCategory(params, where) {
     return this.update(params, { where: where });
   }
 
-public getForgetPasswordByToken(token: string) {
+public getCategory(token: string) {
     const oneHourAgo = new Date();
     oneHourAgo.setHours(oneHourAgo.getHours() - 1); // Subtract 1 hour from the current time
 

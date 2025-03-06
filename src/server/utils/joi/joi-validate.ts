@@ -4,7 +4,34 @@ import { MESSAGES } from '../constants/messages';
 
 const nameRegex = new RegExp(/^[a-zA-Z\s]*$/i);
 const { STRING_PATTERN, OBJECT_MISSNG } = APP_CONSTANT.JOI_VALIDATION_TYPE;
+// Image schema - used within paragraphs
+const imageSchema = joi.object({
+  url: joi.string().required().messages({
+    'any.required': 'Image URL is required',
+    'string.empty': 'Image URL cannot be empty'
+  }),
+  title: joi.string().allow(null, ''),
+  description: joi.string().allow(null, '')
+});
 
+// Paragraph schema for creating new paragraphs
+const createParagraphSchema = joi.object({
+  content: joi.string().required().messages({
+    'any.required': 'Paragraph content is required',
+    'string.empty': 'Paragraph content cannot be empty'
+  }),
+  image: imageSchema.optional()
+});
+
+// Paragraph schema for updating existing paragraphs
+const updateParagraphSchema = joi.object({
+  id: joi.number().optional(),
+  content: joi.string().required().messages({
+    'any.required': 'Paragraph content is required',
+    'string.empty': 'Paragraph content cannot be empty'
+  }),
+  image: imageSchema.optional()
+});
 export const joiValidate = {
   globalApi: {
     country: joi.object().keys({
@@ -16,6 +43,56 @@ export const joiValidate = {
       id: joi.number().required().integer()
     })
   },
+  categoryApi: {
+    createCategory: joi.object().keys({
+      name: joi.string().trim().required(),
+      description: joi.string().trim().optional(),
+      image: joi.string().trim().optional()
+    }),
+    getCategoryById: joi.object().keys({
+      id: joi.number().integer().required()
+    }),
+    updateCategory: joi.object().keys({
+      name: joi.string().trim().optional(),
+      description: joi.string().trim().optional(),
+      image: joi.string().trim().optional()
+    })
+  },
+  createBlogSchema: joi.object({
+    title: joi.string().required().messages({
+      'any.required': 'Blog title is required',
+      'string.empty': 'Blog title cannot be empty'
+    }),
+    category_id: joi.number().required().messages({
+      'any.required': 'Category ID is required',
+      'number.base': 'Category ID must be a number'
+    }),
+    description: joi.string().allow(null, ''),
+    featured: joi.boolean().optional(),
+    status: joi.string().optional(),
+    meta_title: joi.string().allow(null, ''),
+    meta_description: joi.string().allow(null, ''),
+    keywords: joi.string().allow(null, ''),
+    paragraphs: joi.array().items(createParagraphSchema).optional()
+  }),
+  updateBlogSchema: joi.object({
+    title: joi.string().optional().messages({
+      'string.empty': 'Blog title cannot be empty'
+    }),
+    category_id: joi.number().optional().messages({
+      'number.base': 'Category ID must be a number'
+    }),
+    description: joi.string().allow(null, ''),
+    featured: joi.boolean().optional(),
+    status: joi.string().optional(),
+    meta_title: joi.string().allow(null, ''),
+    meta_description: joi.string().allow(null, ''),
+    keywords: joi.string().allow(null, ''),
+    paragraphs: joi.array().items(updateParagraphSchema).optional()
+  }),
+  getBlogById: joi.object().keys({
+    id: joi.number().integer().required()
+  }),
   userApi: {
     otp: joi.object().keys({
       email: joi.string().trim().required().email()
@@ -57,34 +134,32 @@ export const joiValidate = {
       status: joi.string().trim().valid('A', 'I').optional(),
       valid: joi.boolean().optional()
     }),
-    postProfile: joi
-      .object()
-      .keys({
-        firstName: joi
-          .string()
-          .trim()
-          .optional()
-          .allow(null, '')
-          .regex(nameRegex)
-          .messages({
-            [STRING_PATTERN]: 'only alphabet allowed in first name.'
-          }),
-        lastName: joi
-          .string()
-          .trim()
-          .optional()
-          .allow(null, '')
-          .regex(nameRegex)
-          .messages({
-            [STRING_PATTERN]: 'only alphabet allowed in last name.'
-          }),
-        gender: joi.string().trim().required().valid('M', 'F', 'O'),
-        phoneNo: joi.string().trim().required(),
-        address: joi.string().trim().optional(),
-        pinNo: joi.number().integer().optional(),
-        city: joi.string().trim().optional(),
-        // rest details
-      }),
+    postProfile: joi.object().keys({
+      firstName: joi
+        .string()
+        .trim()
+        .optional()
+        .allow(null, '')
+        .regex(nameRegex)
+        .messages({
+          [STRING_PATTERN]: 'only alphabet allowed in first name.'
+        }),
+      lastName: joi
+        .string()
+        .trim()
+        .optional()
+        .allow(null, '')
+        .regex(nameRegex)
+        .messages({
+          [STRING_PATTERN]: 'only alphabet allowed in last name.'
+        }),
+      gender: joi.string().trim().required().valid('M', 'F', 'O'),
+      phoneNo: joi.string().trim().required(),
+      address: joi.string().trim().optional(),
+      pinNo: joi.number().integer().optional(),
+      city: joi.string().trim().optional()
+      // rest details
+    }),
     editProfile: joi
       .object()
       .keys({
@@ -112,19 +187,11 @@ export const joiValidate = {
         address: joi.string().trim().optional().allow(null, ''),
         pinNo: joi.number().integer().optional().allow(null, '')
       })
-      .or(
-        'firstName',
-        'lastName',
-        'phoneNo',
-        'city',
-        'gender',
-        'address',
-        'pinNo'
-      )
+      .or('firstName', 'lastName', 'phoneNo', 'city', 'gender', 'address', 'pinNo')
       .required()
       .messages({
         [OBJECT_MISSNG]:
           'object must contain at least one of [ firstName, lastName, phoneNo, city, gender, address, pinNo ] for edit.'
-      }),
+      })
   }
 };

@@ -1,8 +1,14 @@
 export const TABLES = Object.freeze({
+  t_blog: 't_blog',
   t_user: 't_user',
   t_admin: 't_admin',
   t_usertype_role: 't_usertype_role',
   t_master_user_type: 't_master_user_type',
   t_forget_password: 't_forget_password',
   t_email_change: 't_email_change',
+  t_category: 't_category',
+  t_tag: 't_tag',
+  t_paragraph: 't_paragraph',
+  t_paragraph_image: 't_paragraph_image',
+  t_blog_tag: 't_blog_tag',
 });

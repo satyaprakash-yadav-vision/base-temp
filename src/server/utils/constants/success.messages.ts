@@ -10,4 +10,5 @@ export const SUCCESS = Object.freeze({
   FORGOT_PASSWORD: 'Successfully sends reset password link to your email.',
   REQUEST_SENT_SUCCESSFULLY: 'Request sent to admin successfully.',
   OTP_SENT_SUCCESSFULLY: 'Otp sent successfully.',
+  DELETED: 'Deleted successfully.',
 });
