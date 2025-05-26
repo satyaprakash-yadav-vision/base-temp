@@ -2,6 +2,7 @@ import BlogModel from './t_blog';
 import BlogTagModel from './t_blog_tag';
 import CategoryModel from './t_category';
 import EmailChangeModel from './t_email_change';
+import EmailTemplateModel from './t_email_template';
 import ForgetPasswordModel from './t_forget_password';
 import UserTypeMasterModel from './t_master_usertype';
 import ParagraphModel from './t_paragraph';
@@ -14,6 +15,7 @@ const MODELS = {
   UserModel,
   UserTypeMasterModel,
   UserTypeRoleModel,
+  EmailTemplateModel,
   ForgetPasswordModel,
   EmailChangeModel,
   CategoryModel,
@@ -24,9 +26,9 @@ const MODELS = {
   BlogTagModel,
 };
 
-import { setupAssociations } from './associations';
+// import { setupAssociations } from './associations';
 
 // Setup all model associations
-setupAssociations();
+// setupAssociations();
 
 export { MODELS };

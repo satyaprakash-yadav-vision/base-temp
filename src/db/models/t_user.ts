@@ -65,7 +65,7 @@ UserModel.init(
       allowNull: true
     },
     status: {
-      type: DataTypes.ENUM('A', 'I'),
+      type: DataTypes.ENUM('A', 'I','P'),
       allowNull: false,
       defaultValue: 'I'
     },

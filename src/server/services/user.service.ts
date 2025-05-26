@@ -137,7 +137,7 @@ class UserService {
     const updatedUser = await userMasterDao.updateUser({ status: 'A', username: email }, { user_id: userId });
     const userTypeObj = {
       user_id: userId,
-      user_type_id: APP_CONSTANT.USER_TYPE_ID.PARTNER
+      user_type_id: APP_CONSTANT.USER_TYPE_ID.AUTHOR
     };
    
     //* Map user with Type
@@ -718,9 +718,9 @@ class UserService {
   }
   async getUser(object, options) {
     const { sub, userType } = options.locals?.auth;
-    if (userType !== 'ADMIN') {
-      throw new Error(MESSAGES.ERROR.ADMIN_RIGHT);
-    }
+    // if (userType !== 'ADMIN') {
+    //   throw new Error(MESSAGES.ERROR.ADMIN_RIGHT);
+    // }
 
     const isValidAdmin = await userMasterDao.isValidAdmin(sub);
     if (!isValidAdmin) {

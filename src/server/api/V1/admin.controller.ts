@@ -16,6 +16,16 @@ const controller = {
       return ModifiedResponse.sendFailure(response, { message: err.message });
     }
   },
+  registration: async (object, options) => {
+    const response = GlobalUtils.responseObject();
+    try {
+      await ApiValidator.validateBody(object, joiValidate.userApi.registration);
+      const result = await adminService.registration(object, options);
+      return ModifiedResponse.sendSuccess(response, result);
+    } catch (err) {
+      return ModifiedResponse.sendFailure(response, { message: err.message });
+    }
+  },
   
   // Category CRUD operations
   createCategory: async (object, options) => {

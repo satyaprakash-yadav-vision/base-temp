@@ -6,6 +6,7 @@ export const ERROR = {
   SIGNIN: 'Incorrect username and password combination.',
   INVALID_EMAIL: 'Invalid email format.',
   EMAIL_ALREADY_EXIST: 'This email is already exist.',
+  INVALID_USER_TYPE: 'Invalid user type',
   USERNAME_ALREADY_EXIST: 'Username is already exist.',
   PHONE_ALREADY_EXIST: 'This phone no is already exist.',
   ADMIN_RIGHT: 'Status can be updated by Admin only.',

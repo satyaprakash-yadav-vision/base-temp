@@ -24,7 +24,6 @@ UserTypeMasterModel.init(
       type: DataTypes.ENUM('A', 'I'),
       allowNull: false,
       defaultValue: 'A',
-      comment: 'A:Active, I:Inactive'
     }
   },
   {

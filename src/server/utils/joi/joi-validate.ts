@@ -94,6 +94,13 @@ export const joiValidate = {
     id: joi.number().integer().required()
   }),
   userApi: {
+    registration: joi.object().keys({
+      firstName: joi.string().trim().required(),
+      lastName: joi.string().trim().required(),
+      email: joi.string().trim().required().email(),
+      password: joi.string().trim().required(),
+      userType: joi.number().integer().min(1).required()
+    }),
     otp: joi.object().keys({
       email: joi.string().trim().required().email()
     }),

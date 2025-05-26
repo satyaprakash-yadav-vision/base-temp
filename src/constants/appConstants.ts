@@ -16,7 +16,7 @@ interface EMAIL_TITLES {
 }
 interface USER_TYPE_ID {
   ADMIN: number;
-  PARTNER: number;
+  AUTHOR: number;
 }
 interface USER_FIELDS {
   firstName: string;
@@ -55,7 +55,7 @@ export const APP_CONSTANT: IAppConstant = Object.freeze({
   },
   USER_TYPE_ID: {
     ADMIN: 1,
-    PARTNER: 2,
+    AUTHOR: 2,
   },
    USER_FIELDS: {
     firstName: `first_name`,

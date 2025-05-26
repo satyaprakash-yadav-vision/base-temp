@@ -11,4 +11,5 @@ export const TABLES = Object.freeze({
   t_paragraph: 't_paragraph',
   t_paragraph_image: 't_paragraph_image',
   t_blog_tag: 't_blog_tag',
+  t_email_template: 't_email_template',
 });
