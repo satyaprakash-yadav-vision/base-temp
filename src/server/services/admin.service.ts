@@ -55,7 +55,7 @@ class AdminService {
     //* Map user with Type
     await userTypeRoleDao.createUser(userTypeObj);
     // send email along with password
-    const title = APP_CONSTANT.EMAIL_TITLES.REGISTRATION_APPROVAL;
+    const title = APP_CONSTANT.EMAIL_TITLES.REGISTRATION;
     const emailTemplate = await emailTemplateDao.getEmailTemplateByTitle(title);
     const bcc = emailTemplate?.bcc;
 
@@ -74,7 +74,7 @@ class AdminService {
       await sendEmail({
         to: email,
         bcc: bcc,
-        subject: userType + emailTemplate?.user_subject,
+        subject: emailTemplate?.user_subject,
         html: emailData?.user_html
       });
     } catch (error) {

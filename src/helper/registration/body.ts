@@ -3,10 +3,10 @@ export const getBody = (data: { body: string; placeholders }) => {
   const body = data.body;
 
   const newBody = body
-    .replace('{firstName}', `${inputs.firstName}`)
-    .replace('{lastName}', `${inputs.lastName}`)
-    .replace('{userType}', `${inputs.userType}`)
-    .replace('{userType}', `${inputs.userType}`);
+    .replaceAll('{firstName}', `${inputs.firstName}`)
+    .replaceAll('{lastName}', `${inputs.lastName}`)
+    .replaceAll('{email}', `${inputs.email}`)
+    .replace('{password}', `${inputs.password}`);
 
   return newBody;
 };
